@@ -1,0 +1,57 @@
+let container = document.querySelector(".cart-items");
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+
+let total = 0;
+
+function addCart(){
+cart.forEach((product) => {
+
+    let div = document.createElement("div");
+    div.classList.add("product");
+
+    div.innerHTML = `
+        <img src="${product.thumbnail}" alt="">
+
+        <div class="info">
+            <h3>${product.title}</h3>
+
+            <p>${product.description}</p>
+
+            <div class="links">
+                <a href="#">Remove</a>
+            </div>
+        </div>
+
+        <div class="price">
+            ₹${product.price}
+        </div>
+
+        <div class="qty">
+            <select>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>more</option>
+            </select>
+        </div>
+
+        <div class="total">
+            ₹${product.price}
+        </div>
+    `;
+
+    
+
+    container.appendChild(div);
+
+    total += product.price;
+});
+
+document.getElementById("items").textContent = cart.length;
+document.getElementById("total").textContent = total;
+}
+
+addCart();
+
